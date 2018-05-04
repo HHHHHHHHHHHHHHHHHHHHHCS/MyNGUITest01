@@ -87,7 +87,6 @@ GameObject:
   - component: {fileID: 114571918808459478}
   - component: {fileID: 65694543146132602}
   - component: {fileID: 114436356228802188}
-  - component: {fileID: 114822256894538704}
   - component: {fileID: 114996060303653078}
   m_Layer: 8
   m_Name: MessageItem
@@ -880,17 +879,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &114822256894538704
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1243988889355818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72af25c2a1299f94a86fa9cace6e252a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114920896904342662
 MonoBehaviour:
   m_ObjectHideFlags: 1

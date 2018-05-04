@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 144693348}
-  - component: {fileID: 144693350}
+  - component: {fileID: 144693349}
   - component: {fileID: 144693351}
   m_Layer: 8
   m_Name: MessageContent
@@ -143,7 +143,7 @@ Transform:
   m_Father: {fileID: 832067525}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &144693350
+--- !u!114 &144693349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 144693347}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
+  m_Script: {fileID: 11500000, guid: af32cb267ab51294b88e6183370b5803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemSize: 150
@@ -336,9 +336,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 1
-  dragEffect: 0
-  restrictWithinPanel: 0
-  disableDragIfFits: 0
+  dragEffect: 1
+  restrictWithinPanel: 1
+  disableDragIfFits: 1
   smoothDragStart: 1
   iOSDragEmulation: 1
   scrollWheelFactor: 0.25
@@ -348,7 +348,7 @@ MonoBehaviour:
   verticalScrollBar: {fileID: 0}
   showScrollBars: 1
   customMovement: {x: 1, y: 0}
-  contentPivot: 1
+  contentPivot: 0
   scale: {x: 0, y: 0, z: 0}
   relativePositionOnReset: {x: 0, y: 0}
   centerOnChild: {fileID: 0}
@@ -728,8 +728,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1946047043}
   - component: {fileID: 1946047046}
-  - component: {fileID: 1946047045}
-  - component: {fileID: 1946047044}
   m_Layer: 8
   m_Name: MessageList
   m_TagString: Untagged
@@ -751,31 +749,6 @@ Transform:
   m_Father: {fileID: 1210919839}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1946047044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1946047042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollView: {fileID: 832067527}
-  draggablePanel: {fileID: 0}
---- !u!65 &1946047045
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1946047042}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1250, y: 610, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1946047046
 MonoBehaviour:
   m_ObjectHideFlags: 0
