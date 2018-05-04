@@ -6,7 +6,7 @@ public class DisplacesScrollList : MonoBehaviour
 {
     public MessageItem messageItemPrefab;
 
-    private string[] messgageArray = new string[50];
+    private string[] messgageArray = new string[25];
  
 
     private MessageItem[] messageItemArray;
