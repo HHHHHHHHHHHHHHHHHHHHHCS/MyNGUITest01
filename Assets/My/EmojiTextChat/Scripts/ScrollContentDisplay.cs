@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MessagesStruct = ChatMessagesItem.ChatMessagesStruct;
+using MessagesInfo = ChatMessagesItem.ChatMessagesInfo;
 
 public class ScrollContentDisplay : MonoBehaviour
 {
@@ -68,39 +69,39 @@ Head1|0|4|啊呜|的确";
     [SerializeField]
     private ChatMessagesItem chatMessagesItemPrefab;
 
+    private UIPanel scrollView;
     private float startPos = 370;
-    private int stepPix = 10;
+    private float stepPixed = 10;
+    private float bottomPos;
 
-    private MessagesStruct[] messagesStruct;
+    private List<MessagesInfo> messagesInfoList;
 
 
     private void Awake()
     {
-        messagesStruct = OnInitMessageArray();
-        OnInitPos(messagesStruct);
+        scrollView = GetComponent<UIPanel>();
+        var messagesStruct = OnInitMessageArray();
+        OnInitScrollView(messagesStruct);
     }
 
     private MessagesStruct[] OnInitMessageArray()
     {
+        messagesInfoList = new List<MessagesInfo>();
+        bottomPos = startPos;
+
         var messageInfo = chatMessage.Split('\n');
         MessagesStruct[] messageStructInfos =
             new MessagesStruct[messageInfo.Length];
         string[] messgaeDetailInfo;
 
         chatMessagesItemPrefab.UpdateNGUIFont();
-        NGUIText.fontSize = 28;
+        NGUIText.fontSize = chatMessagesItemPrefab.GetFontSize();
         NGUIText.rectHeight = 1000000;
         NGUIText.regionHeight = 1000000;
         NGUIText.Update();
 
         for (int i = 0; i < messageInfo.Length; i++)
         {
-            chatMessagesItemPrefab.UpdateNGUIFont();
-            NGUIText.fontSize = 28;
-            NGUIText.rectHeight = 1000000;
-            NGUIText.regionHeight = 1000000;
-            NGUIText.Update();
-
             messgaeDetailInfo = messageInfo[i].Split('|');
             messageStructInfos[i] = new MessagesStruct()
             {
@@ -110,12 +111,19 @@ Head1|0|4|啊呜|的确";
                 playerName = messgaeDetailInfo[3],
                 chatContentMessage = messgaeDetailInfo[4],
             };
-            ProcessText(messgaeDetailInfo[4]);
-        }
+            MessagesInfo info = new MessagesInfo()
+            {
+                chatMessagesStruct = messageStructInfos[i],
+                posY = bottomPos,
+            };
+            bottomPos -= (80 + ProcessText(messgaeDetailInfo[4]) + stepPixed);
+            messagesInfoList.Add(info);
+        };
+
         return messageStructInfos;
     }
 
-    private void OnInitPos(MessagesStruct[] messagesStruct)
+    private void OnInitScrollView(MessagesStruct[] messagesStruct)
     {
         float lastPosY = startPos;
         for (int i = 0; i < messagesStruct.Length; i++)
@@ -124,11 +132,19 @@ Head1|0|4|啊呜|的确";
             var height = messagesItem.OnInit(messagesStruct[i]);
             messagesItem.transform.localPosition =
                 new Vector3(0, lastPosY, 0);
-            lastPosY -= height + stepPix;
+
+            lastPosY -= height + stepPixed;
         }
+        var endPosY = lastPosY + startPos;
+        var pos = scrollView.transform.localPosition;
+        pos.y = -endPosY;
+        scrollView.transform.localPosition= pos;
+        var offest = scrollView.clipOffset;
+        offest.y = endPosY;
+        scrollView.clipOffset= offest;
     }
 
-    private void ProcessText(string mText)
+    private int ProcessText(string mText)
     {
         float regionY = 1;
 
@@ -139,8 +155,7 @@ Head1|0|4|啊呜|的确";
         if (regionY != 1f) mHeight = Mathf.RoundToInt(mHeight / regionY);
         if ((mHeight & 1) == 1) ++mHeight;
 
-        Debug.Log(mHeight);
-
+        return mHeight;
     }
 
 

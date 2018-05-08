@@ -12,9 +12,15 @@ public class ChatMessagesItem : MonoBehaviour
         public int vipLevel;
         public string playerName;
         public string chatContentMessage;
+
+        public float posY;
     }
 
-    public float posY;
+    public class ChatMessagesInfo
+    {
+        public ChatMessagesStruct chatMessagesStruct;
+        public float posY;
+    }
 
     private UIWidget widget;
     private UISprite headSprite;
