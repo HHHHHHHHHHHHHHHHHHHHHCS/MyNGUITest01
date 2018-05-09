@@ -70,21 +70,30 @@ Head1|0|4|啊呜|的确";
     private ChatMessagesItem chatMessagesItemPrefab;
 
     private UIPanel scrollView;
-    private float startPos = 370;
-    private float stepPixed = 10;
+    private const float itemBaseWidth = 80;
+    private const float startPos = 370;
+    private const float stepPixed = 10;
+    private const float instantiateNumber = 14;
+    private const float offestDistance = 200;
     private float bottomPos;
 
     private List<MessagesInfo> messagesInfoList;
+    private List<ChatMessagesItem> showItemList;
+    private Queue<ChatMessagesItem> hideItemQueue;
 
 
     private void Awake()
     {
         scrollView = GetComponent<UIPanel>();
-        var messagesStruct = OnInitMessageArray();
-        OnInitScrollView(messagesStruct);
+        OnInitMessageArray();
+        OnInitScrollView();
+        ScrollContentBottm();
     }
 
-    private MessagesStruct[] OnInitMessageArray()
+    /// <summary>
+    /// 初始化聊天消息
+    /// </summary>
+    private void OnInitMessageArray()
     {
         messagesInfoList = new List<MessagesInfo>();
         bottomPos = startPos;
@@ -115,36 +124,85 @@ Head1|0|4|啊呜|的确";
             {
                 chatMessagesStruct = messageStructInfos[i],
                 posY = bottomPos,
+                isShow = false,
             };
-            bottomPos -= (80 + ProcessText(messgaeDetailInfo[4]) + stepPixed);
+            bottomPos -= (itemBaseWidth + CalculateTextHeight(messgaeDetailInfo[4]) + stepPixed);
             messagesInfoList.Add(info);
         };
-
-        return messageStructInfos;
     }
 
-    private void OnInitScrollView(MessagesStruct[] messagesStruct)
+
+    /// <summary>
+    /// 初始化聊天每一句话的prefab
+    /// </summary>
+    private void OnInitScrollView()
     {
-        float lastPosY = startPos;
-        for (int i = 0; i < messagesStruct.Length; i++)
+        showItemList = new List<ChatMessagesItem>();
+        hideItemQueue = new Queue<ChatMessagesItem>();
+        GetComponent<UIPanel>().onClipMove = SetScrollView;
+
+        for (int i = 0; i < instantiateNumber; i++)
         {
             var messagesItem = Instantiate(chatMessagesItemPrefab, transform);
-            var height = messagesItem.OnInit(messagesStruct[i]);
-            messagesItem.transform.localPosition =
-                new Vector3(0, lastPosY, 0);
-
-            lastPosY -= height + stepPixed;
+            messagesItem.OnCreate();
+            hideItemQueue.Enqueue(messagesItem);
         }
-        var endPosY = lastPosY + startPos;
-        var pos = scrollView.transform.localPosition;
-        pos.y = -endPosY;
-        scrollView.transform.localPosition= pos;
-        var offest = scrollView.clipOffset;
-        offest.y = endPosY;
-        scrollView.clipOffset= offest;
+
+        SetScrollView(scrollView);
     }
 
-    private int ProcessText(string mText)
+    /// <summary>
+    /// 设置显示跟隐藏
+    /// </summary>
+    /// <param name="panel">滑动面板</param>
+    private void SetScrollView(UIPanel panel )
+    {
+        //计算出 最高和最低的边界
+        float clipStartY = panel.clipOffset.y + startPos + offestDistance;
+        float clipEndY = panel.clipOffset.y - panel.width
+            + startPos - offestDistance;
+
+
+        //先隐藏显示的
+        for (int i = showItemList.Count - 1; i >= 0; i--)
+        {
+            var item = showItemList[i];
+            if (item.CurrentInfo.posY > clipStartY
+                || item.CurrentInfo.posY < clipEndY)
+            {
+                item.OnHide();
+                hideItemQueue.Enqueue(item);
+                showItemList.Remove(item);
+            }
+        }
+
+        //在显示要显示的
+        for (int i = 0; i < messagesInfoList.Count; i++)
+        {
+            var item = messagesInfoList[i];
+            if (item.posY <= clipStartY
+                && item.posY >= clipEndY)
+            {
+                if (!item.isShow)
+                {
+                    var hideItem = hideItemQueue.Dequeue();
+                    hideItem.OnInit(item);
+                    showItemList.Add(hideItem);
+                }
+            }
+            else if(item.posY < clipEndY)
+            {
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 计算文字宽度为了实现不同prefab 的制作
+    /// </summary>
+    /// <param name="mText">文字</param>
+    /// <returns>文字宽度</returns>
+    private int CalculateTextHeight(string mText)
     {
         float regionY = 1;
 
@@ -158,5 +216,18 @@ Head1|0|4|啊呜|的确";
         return mHeight;
     }
 
+    /// <summary>
+    /// 滑动到底部
+    /// </summary>
+    public void ScrollContentBottm()
+    {
+        var endPosY = bottomPos + startPos;
 
+        var pos = scrollView.transform.localPosition;
+        pos.y = -endPosY;
+        scrollView.transform.localPosition = pos;
+        var offest = scrollView.clipOffset;
+        offest.y = endPosY;
+        scrollView.clipOffset = offest;
+    }
 }

@@ -20,7 +20,9 @@ public class ChatMessagesItem : MonoBehaviour
     {
         public ChatMessagesStruct chatMessagesStruct;
         public float posY;
+        public bool isShow;
     }
+    public ChatMessagesInfo CurrentInfo { private set; get; }
 
     private UIWidget widget;
     private UISprite headSprite;
@@ -29,7 +31,9 @@ public class ChatMessagesItem : MonoBehaviour
     private UIButton functionButton;
     private UILabel chatContentText;
 
-    private void Awake()
+
+
+    public void OnCreate()
     {
         Transform root = transform;
         widget = root.GetComponent<UIWidget>();
@@ -38,17 +42,49 @@ public class ChatMessagesItem : MonoBehaviour
         nameText = root.Find("NameText").GetComponent<UILabel>();
         functionButton = root.Find("FunctionButton").GetComponent<UIButton>();
         chatContentText = root.Find("ChatContentText").GetComponent<UILabel>();
+
+        gameObject.SetActive(false);
     }
 
-    public int OnInit(ChatMessagesStruct _struct)
+    public void OnInit(ChatMessagesInfo _currentInfo)
     {
+        CurrentInfo = _currentInfo;
+        var _struct = _currentInfo.chatMessagesStruct;
+
+        _currentInfo.isShow = true;
+        transform.localPosition = new Vector3(0, _currentInfo.posY, 0);
+
         headSprite.spriteName = _struct.headSpriteName;
         vipText.text = "VIP" + _struct.vipLevel;
         nameText.text = _struct.playerName;
-
         chatContentText.text = _struct.chatContentMessage;
         widget.height = 80 + chatContentText.height;
-        return widget.height;
+
+        SetIsSelfStyle(_struct.isSelf);
+        gameObject.SetActive(true);
+        //return widget.height;
+    }
+
+    private void SetIsSelfStyle(bool _isSelf)
+    {
+        if (_isSelf)
+        {
+            headSprite.transform.parent.localPosition = new Vector3(234, -54, 0);
+            vipText.transform.localPosition = new Vector3(-275, -17, 0);
+            nameText.transform.localPosition = new Vector3(-170, -14, 0);
+
+            chatContentText.transform.localPosition = new Vector3(-271, -69, 0);
+            functionButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            headSprite.transform.parent.localPosition = new Vector3(-234, -54, 0);
+            vipText.transform.localPosition = new Vector3(-170, -17, 0);
+            nameText.transform.localPosition = new Vector3(-65, -14, 0);
+
+            chatContentText.transform.localPosition = new Vector3(-143, -69, 0);
+            functionButton.gameObject.SetActive(true);
+        }
     }
 
     public int GetFontSize()
@@ -69,4 +105,10 @@ public class ChatMessagesItem : MonoBehaviour
         chatContentText.UpdateNGUIText();
     }
 
+    public void OnHide()
+    {
+        gameObject.SetActive(false);
+        CurrentInfo.isShow = false;
+        CurrentInfo = null;
+    }
 }
