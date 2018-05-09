@@ -83,6 +83,7 @@ public class ScrollContentDisplay : MonoBehaviour
             vipLevel = int.Parse(messgaeDetailInfo[2]),
             playerName = messgaeDetailInfo[3],
             chatContentMessage = messgaeDetailInfo[4],
+            spriteMessgae = messgaeDetailInfo.Length < 6 ? null : messgaeDetailInfo[5],
         };
         MessagesInfo info = new MessagesInfo()
         {
@@ -90,7 +91,8 @@ public class ScrollContentDisplay : MonoBehaviour
             posY = bottomPos,
             isShow = false,
         };
-        var width = (itemBaseWidth + CalculateTextHeight(messgaeDetailInfo[4]) + stepPixed);
+        var width = CalculateHeight(messageStructInfo.chatContentMessage, messageStructInfo.spriteMessgae);
+        width += itemBaseWidth + stepPixed;
         bottomPos -= width;
         messagesInfoList.Add(info);
 
@@ -184,6 +186,23 @@ public class ScrollContentDisplay : MonoBehaviour
     }
 
     /// <summary>
+    /// 计算宽度 可能是图片可能是文字
+    /// </summary>
+    /// <param name="messgaeText">文字</param>
+    /// <returns>文字宽度</returns>
+    private float CalculateHeight(string messgaeText, string spritetText)
+    {
+        if (!string.IsNullOrEmpty(spritetText))
+        {
+            return chatMessagesItemPrefab.GetSpriteBgHeight();
+        }
+        else
+        {
+            return CalculateTextHeight(messgaeText);
+        }
+    }
+
+    /// <summary>
     /// 计算文字宽度为了实现不同prefab 的制作
     /// </summary>
     /// <param name="mText">文字</param>
@@ -217,14 +236,14 @@ public class ScrollContentDisplay : MonoBehaviour
     /// </summary>
     public void SetScrollContent(UIPanel panel, float y)
     {
-       if (!scrollView)
-       {
-           scrollView = GetComponent<UIScrollView>();
-       }
-       if (scrollView)
-       {
+        if (!scrollView)
+        {
+            scrollView = GetComponent<UIScrollView>();
+        }
+        if (scrollView)
+        {
             scrollView.StopScroll();
-       }
+        }
 
         var pos = panel.transform.localPosition;
         pos.y = -y;

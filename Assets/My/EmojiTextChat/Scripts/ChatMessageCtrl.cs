@@ -86,5 +86,11 @@ Head1|0|4|啊呜|的确";
             display.AddMessage(
                 string.Format("{0}|{1}|{2}|{3}|{4}", "Head"+Random.Range(1,4).ToString(), Random.Range(0, 2), Random.Range(1, 99), "我是" + Random.Range(0, 30), s));
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            display.AddMessage(
+                string.Format("{0}|{1}|{2}|{3}|{4}|[#{5}]", "Head" + Random.Range(1, 4).ToString(), Random.Range(0, 2), Random.Range(1, 99)
+                , "我是" + Random.Range(0, 30), null,Random.Range(1,6)));
+        }
     }
 }

@@ -12,17 +12,18 @@ public class ChatMessagesItem : MonoBehaviour
         public int vipLevel;
         public string playerName;
         public string chatContentMessage;
-
-        public float posY;
+        public string spriteMessgae;
     }
-
     public class ChatMessagesInfo
     {
         public ChatMessagesStruct chatMessagesStruct;
         public float posY;
         public bool isShow;
     }
+
     public ChatMessagesInfo CurrentInfo { private set; get; }
+
+    private const int widgeBaseHeight = 80;
 
     private UIWidget widget;
     private UISprite headSprite;
@@ -30,8 +31,8 @@ public class ChatMessagesItem : MonoBehaviour
     private UILabel nameText;
     private UIButton functionButton;
     private UILabel chatContentText;
-
-
+    private UISprite emojiSpriteBg;
+    private UISprite emojiSprite;
 
     public void OnCreate()
     {
@@ -42,6 +43,8 @@ public class ChatMessagesItem : MonoBehaviour
         nameText = root.Find("NameText").GetComponent<UILabel>();
         functionButton = root.Find("FunctionButton").GetComponent<UIButton>();
         chatContentText = root.Find("ChatContentText").GetComponent<UILabel>();
+        emojiSpriteBg = root.Find("EmojiSpriteBg").GetComponent<UISprite>();
+        emojiSprite = root.Find("EmojiSpriteBg/EmojiSprite").GetComponent<UISprite>();
 
         gameObject.SetActive(false);
     }
@@ -57,39 +60,61 @@ public class ChatMessagesItem : MonoBehaviour
         headSprite.spriteName = _struct.headSpriteName;
         vipText.text = "VIP" + _struct.vipLevel;
         nameText.text = _struct.playerName;
-        chatContentText.text = _struct.chatContentMessage;
-        widget.height = 80 + chatContentText.height;
 
-        SetIsSelfStyle(_struct.isSelf);
+
+        bool isSpriteMessage = !string.IsNullOrEmpty(_struct.spriteMessgae);
+        if (isSpriteMessage)
+        {
+            emojiSprite.spriteName= _struct.spriteMessgae;
+        }
+        else
+        {
+            chatContentText.text = _struct.chatContentMessage;
+            widget.height = widgeBaseHeight + chatContentText.height;
+        }
+
+        SetIsStyle(_struct.isSelf, isSpriteMessage);
         gameObject.SetActive(true);
-        //return widget.height;
     }
 
-    private void SetIsSelfStyle(bool _isSelf)
+    private void SetIsStyle(bool _isSelf,bool _isSprite)
     {
+        emojiSpriteBg.gameObject.SetActive(_isSprite);
+        chatContentText.gameObject.SetActive(!_isSprite);
+        functionButton.gameObject.SetActive(!_isSelf);
         if (_isSelf)
         {
             headSprite.transform.parent.localPosition = new Vector3(234, -54, 0);
             vipText.transform.localPosition = new Vector3(-275, -17, 0);
             nameText.transform.localPosition = new Vector3(-170, -14, 0);
-
             chatContentText.transform.localPosition = new Vector3(-271, -69, 0);
-            functionButton.gameObject.SetActive(false);
+            emojiSpriteBg.transform.localPosition = new Vector3(-54, -97, 0);
+            emojiSprite.transform.localPosition = new Vector3(180, 0, 0);
         }
         else
         {
             headSprite.transform.parent.localPosition = new Vector3(-234, -54, 0);
             vipText.transform.localPosition = new Vector3(-170, -17, 0);
             nameText.transform.localPosition = new Vector3(-65, -14, 0);
-
             chatContentText.transform.localPosition = new Vector3(-143, -69, 0);
-            functionButton.gameObject.SetActive(true);
+            emojiSpriteBg.transform.localPosition = new Vector3(73, -97, 0);
+            emojiSprite.transform.localPosition = new Vector3(-180, 0, 0);
+
         }
+    }
+
+    public int GetSpriteBgHeight()
+    {
+        if(!emojiSpriteBg)
+        {
+            emojiSpriteBg = transform.Find("EmojiSpriteBg").GetComponent<UISprite>();
+        }
+        return emojiSpriteBg.height;
     }
 
     public int GetFontSize()
     {
-        if (chatContentText == null)
+        if (!chatContentText)
         {
             chatContentText = transform.Find("ChatContentText").GetComponent<UILabel>();
         }
