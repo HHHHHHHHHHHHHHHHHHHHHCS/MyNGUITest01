@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 1
-  dragEffect: 1
+  dragEffect: 2
   restrictWithinPanel: 1
   disableDragIfFits: 1
   smoothDragStart: 1
@@ -464,7 +464,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.6410257
+  aspectRatio: 1.0256411
   mType: 1
   mFillDirection: 4
   mFillAmount: 1

@@ -160,9 +160,9 @@ public class UIScrollView : MonoBehaviour
 	protected Plane mPlane;
 	protected Vector3 mLastPos;
 	protected bool mPressed = false;
-	protected Vector3 mMomentum = Vector3.zero;
-	protected float mScroll = 0f;
-	protected Bounds mBounds;
+    protected Vector3 mMomentum = Vector3.zero;//@NGUI-HCS:
+    protected float mScroll = 0f;//@NGUI-HCS:
+    protected Bounds mBounds;
 	protected bool mCalculatedBounds = false;
 	protected bool mShouldMove = false;
 	protected bool mIgnoreCallbacks = false;
@@ -998,8 +998,8 @@ public class UIScrollView : MonoBehaviour
 				mShouldMove = false;
 				if (onStoppedMoving != null)
 					onStoppedMoving();
-			}
-		}
+            }
+        }
 		else
 		{
 			// Dampen the momentum
@@ -1023,6 +1023,23 @@ public class UIScrollView : MonoBehaviour
 			else if (scale.y != 0f) Scroll(delta.y);
 		}
 	}
+
+    /// <summary>
+    /// @NGUIChange
+    /// 停止滚动
+    /// </summary>
+    public void StopScroll()
+    {
+        mScroll = 0f;
+        mMomentum = Vector3.zero;
+
+        SpringPanel sp = GetComponent<SpringPanel>();
+        if (sp != null && sp.enabled) return;
+
+        mShouldMove = false;
+        if (onStoppedMoving != null)
+            onStoppedMoving();
+    }
 
 #if UNITY_EDITOR
 
