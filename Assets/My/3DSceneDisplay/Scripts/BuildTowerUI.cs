@@ -37,6 +37,9 @@ public class BuildTowerUI : MonoBehaviour
 
     private void OnClick(GameObject go)
     {
-        TowerBase.current.UIEventCallBack(towerInfo);
+        if(TowerBase.current)
+        {
+            TowerBase.current.UIEventCallBack(towerInfo);
+        }
     }
 }

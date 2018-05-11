@@ -29,7 +29,8 @@ public class TowerBase : MonoBehaviour, ITowerEvent
     {
         if(modelTS.childCount>0)
         {
-            var box = modelTS.Find("Model").GetChild(0).GetComponent<BoxCollider>();
+            //删除原来的model  然后添加新的模型 重新复制boxCollider
+            var box = modelTS.GetChild(0).GetComponent<BoxCollider>();
             boxCol.center = box.center;
             boxCol.size = box.size;
             box.enabled = false;
