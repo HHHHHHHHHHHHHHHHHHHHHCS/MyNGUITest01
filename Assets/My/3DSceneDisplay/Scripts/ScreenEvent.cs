@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class RayCheck3D : MonoBehaviour
+public class ScreenEvent : MonoBehaviour
 {
     private Transform targetTS;
     private Camera targetCamera;
     #region Build Setting
-    private const string towerEmpty = "TowerEmpty";
-    private const string tower = "Tower";
-    private int towerMask;
+    private const string tag_towerEmpty = "TowerEmpty";
+    private const string tag_tower= "Tower";
+    private int layer_towerMask;
     #endregion
 
     #region Map Setting
@@ -23,11 +23,12 @@ public class RayCheck3D : MonoBehaviour
 
     #region Mouse Setting
     private const float checkMoveDistance = 150f;
-    private const float moveSpeed = 5f;
+    private const float moveSpeed = 1.5f;
     private const float zoomScaleSpeed = 33f;
     private const float stepDistanceTime = 100f;
     private const float minDampingDistance = 0.001f;
     private const float cancelDampingDistance = 5f;
+    private const float maxMoveDistance = 3f;
 
     private bool isPress, isTwoTouch, startDamping, isOverUI;
     private float moveDistance, currentTime;
@@ -39,7 +40,7 @@ public class RayCheck3D : MonoBehaviour
 
     private void Awake()
     {
-        towerMask = LayerMask.GetMask("Tower");
+        layer_towerMask = LayerMask.GetMask("Tower");
         targetTS = transform;
         targetCamera = targetTS.GetComponent<Camera>();
     }
@@ -53,22 +54,23 @@ public class RayCheck3D : MonoBehaviour
 
     private void CheckPress()
     {
-        if (!(Input.touchCount > 0 || Input.GetMouseButton(0)))
+        var havePress = Input.GetMouseButton(0) || Input.GetMouseButtonUp(0);
+        if (!(Input.touchCount > 0 || havePress))
         {
             isOverUI = false;
             return;
         }
-
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            isOverUI = isOverUI||UICamera.isOverUI;
+            isOverUI = isOverUI || UICamera.isOverUI;
         }
         if (!isOverUI)
         {
             bool isFiger = Input.touchCount > 0;
 
-            if (Input.touchCount == 1 || (!isFiger && Input.GetMouseButton(0)))
+            if (Input.touchCount == 1 || (!isFiger && havePress))
             {
+
                 TouchPhase touchPhase = TouchPhase.Canceled;
                 Vector2 nowPos;
                 if (isFiger)
@@ -85,6 +87,7 @@ public class RayCheck3D : MonoBehaviour
                 if (isTwoTouch)
                 {
                     oldPos1 = nowPos;
+                    moveDistance = 0;
                     isTwoTouch = false;
                     return;
                 }
@@ -112,12 +115,9 @@ public class RayCheck3D : MonoBehaviour
 
     private void OnePressDown(Vector2 nowPos)
     {
-        if (!UICamera.isOverUI)
-        {
-            isPress = true;
-            moveDistance = 0;
-            oldPos1 = nowPos;
-        }
+        isPress = true;
+        moveDistance = 0;
+        oldPos1 = nowPos;
     }
 
     private void OnePressKeep(Vector2 nowPos)
@@ -129,7 +129,12 @@ public class RayCheck3D : MonoBehaviour
 
     private void OnePressUp(Vector2 nowPos)
     {
+        if (moveDistance <= maxMoveDistance)
+        {
+            StartRayCast(nowPos);
+        }
         isPress = false;
+        moveDistance = 0;
     }
 
     private void TwoTouch()
@@ -161,11 +166,11 @@ public class RayCheck3D : MonoBehaviour
 
         Vector3 pos = targetTS.localPosition - movePos * moveSpeed * Time.deltaTime;
         //边界用
-        //pos.x = Mathf.Clamp(pos.x, clampMapBorder.x, clampMapBorder.y);
-        //pos.z = Mathf.Clamp(pos.z, clampMapBorder.z, clampMapBorder.w);
+        pos.x = Mathf.Clamp(pos.x, clampMapBorder.x, clampMapBorder.y);
+        pos.z = Mathf.Clamp(pos.z, clampMapBorder.z, clampMapBorder.w);
         targetPos = pos;
         var dis = Vector3.Distance(targetPos, transform.localPosition);
-
+        moveDistance += dis;
         if (dis < minDampingDistance * Time.deltaTime)
         {
             startDamping = false;
@@ -195,6 +200,21 @@ public class RayCheck3D : MonoBehaviour
             if (Vector3.Distance(transform.localPosition, targetPos) <= minDampingDistance)
             {
                 startDamping = false;
+            }
+        }
+    }
+
+    private void StartRayCast(Vector2 nowPos)
+    {
+        RaycastHit hitInfo;
+        Ray ray = targetCamera.ScreenPointToRay(nowPos);
+        if (Physics.Raycast(ray, out hitInfo, 1000f, layer_towerMask))
+        {
+            GameObject gameObj = hitInfo.collider.gameObject;
+            var towerBase = gameObj.GetComponent<TowerBase>();
+            if(towerBase)
+            {
+                towerBase.OnClick();
             }
         }
     }
