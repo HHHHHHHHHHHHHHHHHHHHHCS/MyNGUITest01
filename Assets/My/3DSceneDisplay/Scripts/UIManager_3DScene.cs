@@ -7,6 +7,7 @@ public class UIManager_3DScene : MonoBehaviour
     public static UIManager_3DScene Instance { get; private set; }
 
     public TowerBuildPanel TowerBuildPanel { get; private set; }
+    public FlamethrowerPanel FlamethrowerPanel { get; private set; }
 
     private void Awake()
     {
@@ -14,5 +15,6 @@ public class UIManager_3DScene : MonoBehaviour
 
         Transform root = transform;
         TowerBuildPanel = root.Find("TowerBuildPanel").GetComponent<TowerBuildPanel>();
+        FlamethrowerPanel = root.Find("FlamethrowerPanel").GetComponent<FlamethrowerPanel>();
     }
 }

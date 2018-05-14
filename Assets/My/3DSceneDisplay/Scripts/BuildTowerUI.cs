@@ -12,6 +12,7 @@ public class BuildTowerUI : MonoBehaviour
         public string towerDes;
     }
 
+
     private UISprite towerIconSprite;
     private UILabel towerNameText;
     private UILabel towerDesText;
@@ -25,19 +26,21 @@ public class BuildTowerUI : MonoBehaviour
         towerNameText = root.Find("TowerNameBg/TowerNameText").GetComponent<UILabel>();
         towerDesText = root.Find("TowerDesText").GetComponent<UILabel>();
 
-        UIEventListener.Get(gameObject).onClick += OnClick;
+        UIEventListener.Get(gameObject).onClick += OnClickButton;
     }
 
-    public void OnInit(BuildTowerInfo towerInfo)
+    public void OnInit(BuildTowerInfo _towerInfo)
     {
-        towerIconSprite.spriteName = towerInfo.towerIcon;
-        towerNameText.text = towerInfo.towerName;
-        towerDesText.text = towerInfo.towerDes;
+        towerInfo = _towerInfo;
+        towerIconSprite.spriteName = _towerInfo.towerIcon;
+        towerNameText.text = _towerInfo.towerName;
+        towerDesText.text = _towerInfo.towerDes;
     }
 
-    private void OnClick(GameObject go)
+    private void OnClickButton(GameObject go)
     {
-        if(TowerBase.current)
+        UIManager_3DScene.Instance.TowerBuildPanel.OnClose(null);
+        if (TowerBase.current)
         {
             TowerBase.current.UIEventCallBack(towerInfo);
         }
