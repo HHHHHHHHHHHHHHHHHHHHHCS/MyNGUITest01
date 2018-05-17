@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BuildTowerInfo = BuildTowerUI.BuildTowerInfo;
 
-public class TowerBase : MonoBehaviour, ITowerEvent
+public class TowerBase : MonoBehaviour, IClickEvent
 {
     #region const string
     private const string towerDir = @"Prefabs/Tower/";
@@ -58,6 +58,10 @@ public class TowerBase : MonoBehaviour, ITowerEvent
     public static Dictionary<string, TowerInfo> towerInfoDic;
     public static TowerBase current;
 
+    [SerializeField]
+    private int towerID;
+    private int cloudID;
+
     private BoxCollider boxCol;
     private Transform modelTS;
     private TowerInfo towerinfo;
@@ -65,10 +69,8 @@ public class TowerBase : MonoBehaviour, ITowerEvent
     private void Awake()
     {
         OnInitDic();
-        Transform root = transform;
-        boxCol = gameObject.GetComponent<BoxCollider>();
-        modelTS = transform.Find("Model");
-        CreateDeaultTower();
+        OnInitCompent();
+        //CreateDeaultTower();
     }
 
     private void OnInitDic()
@@ -102,13 +104,23 @@ public class TowerBase : MonoBehaviour, ITowerEvent
         }
     }
 
-    protected virtual void OnInit()
+    protected virtual void OnInitCompent()
+    {
+        Transform root = transform;
+        root.name = root.name + "_" + towerID;
+        boxCol = gameObject.GetComponent<BoxCollider>();
+        boxCol.enabled = false;
+        modelTS = transform.Find("Model");
+    }
+
+    protected virtual void OnInitTower()
     {
         if (modelTS.childCount > 0)
         {
             var box = modelTS.GetChild(modelTS.childCount-1).GetComponent<BoxCollider>();
             boxCol.center = box.center;
             boxCol.size = box.size;
+            boxCol.enabled = true;
             box.enabled = false;
         }
     }
@@ -122,6 +134,18 @@ public class TowerBase : MonoBehaviour, ITowerEvent
                 UIManager_3DScene.Instance.TowerBuildPanel.OnShow();
                 break;
             case 1:
+                UIManager_3DScene.Instance.FlamethrowerPanel.OnShow(towerinfo);
+                break;
+            case 2:
+                UIManager_3DScene.Instance.FlamethrowerPanel.OnShow(towerinfo);
+                break;
+            case 3:
+                UIManager_3DScene.Instance.FlamethrowerPanel.OnShow(towerinfo);
+                break;
+            case 4:
+                UIManager_3DScene.Instance.FlamethrowerPanel.OnShow(towerinfo);
+                break;
+            case 5:
                 UIManager_3DScene.Instance.FlamethrowerPanel.OnShow(towerinfo);
                 break;
         }
@@ -154,7 +178,7 @@ public class TowerBase : MonoBehaviour, ITowerEvent
         {
             towerinfo = _towerInfo;
             Instantiate(go, modelTS);
-            OnInit();
+            OnInitTower();
         }
     }
 }

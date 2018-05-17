@@ -9,8 +9,8 @@ public class ScreenEvent : MonoBehaviour
     private Camera targetCamera;
     #region Build Setting
     private const string tag_towerEmpty = "TowerEmpty";
-    private const string tag_tower= "Tower";
-    private int layer_towerMask;
+    private const string tag_tower = "Tower";
+    private int layer_clickMask;
     #endregion
 
     #region Map Setting
@@ -30,7 +30,7 @@ public class ScreenEvent : MonoBehaviour
     private const float cancelDampingDistance = 5f;
     private const float maxMoveDistance = 3f;
 
-    private bool isPress, isTwoTouch, startDamping, isOverUI;
+    private bool isNav, isPress, isTwoTouch, startDamping, isOverUI;
     private float moveDistance, currentTime;
     private Vector2 oldPos1, oldPos2;
     private Vector3 targetPos, currentVelocity;
@@ -40,7 +40,7 @@ public class ScreenEvent : MonoBehaviour
 
     private void Awake()
     {
-        layer_towerMask = LayerMask.GetMask("Tower");
+        layer_clickMask = LayerMask.GetMask("Tower", "Cloud");
         targetTS = transform;
         targetCamera = targetTS.GetComponent<Camera>();
     }
@@ -54,6 +54,8 @@ public class ScreenEvent : MonoBehaviour
 
     private void CheckPress()
     {
+        if (isNav)
+            return;
         var havePress = Input.GetMouseButton(0) || Input.GetMouseButtonUp(0);
         if (!(Input.touchCount > 0 || havePress))
         {
@@ -208,15 +210,32 @@ public class ScreenEvent : MonoBehaviour
     {
         RaycastHit hitInfo;
         Ray ray = targetCamera.ScreenPointToRay(nowPos);
-        if (Physics.Raycast(ray, out hitInfo, 1000f, layer_towerMask))
+        if (Physics.Raycast(ray, out hitInfo, 1000f, layer_clickMask))
         {
             GameObject gameObj = hitInfo.collider.gameObject;
-            var towerBase = gameObj.GetComponent<TowerBase>();
-            if(towerBase)
+            var towerBase = gameObj.GetComponent<IClickEvent>();
+            if (towerBase != null)
             {
                 towerBase.OnClick();
             }
         }
+    }
+
+    public void NavigationBuild(Vector3 buildPos)
+    {
+        isNav = true;
+        Transform cameraTS = targetCamera.transform;
+        Vector3 angle = cameraTS.eulerAngles;
+        cameraTS.eulerAngles = new Vector3(90,0,0);
+
+        Vector3 centerViewPos = targetCamera.WorldToViewportPoint(buildPos);
+        centerViewPos.y -= Mathf.Cos(angle.x * Mathf.Deg2Rad);
+        var centerPos = targetCamera.ViewportToWorldPoint(centerViewPos);
+
+        cameraTS.eulerAngles = angle;
+        targetCamera.transform.position = new Vector3(centerPos.x, targetCamera.transform.position.y, centerPos.z);
+        isNav = false;
+
     }
 }
 

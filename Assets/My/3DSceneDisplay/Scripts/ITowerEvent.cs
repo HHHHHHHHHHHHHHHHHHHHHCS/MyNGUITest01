@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITowerEvent
+public interface IClickEvent
 {
     void OnClick();
 }
