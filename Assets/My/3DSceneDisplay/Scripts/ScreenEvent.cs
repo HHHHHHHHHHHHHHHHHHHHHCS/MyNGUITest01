@@ -30,13 +30,18 @@ public class ScreenEvent : MonoBehaviour
     private const float cancelDampingDistance = 5f;
     private const float maxMoveDistance = 3f;
 
-    private bool isNav, isPress, isTwoTouch, startDamping, isOverUI;
+    private bool  isPress, isTwoTouch, startDamping, isOverUI;
     private float moveDistance, currentTime;
     private Vector2 oldPos1, oldPos2;
     private Vector3 targetPos, currentVelocity;
 
     #endregion
 
+    #region Nav Setting
+    private bool isNav;
+    private Vector3 navPos, currentPos;
+    private const float navTime=1.5f;
+    #endregion
 
     private void Awake()
     {
@@ -50,6 +55,7 @@ public class ScreenEvent : MonoBehaviour
     {
         CheckPress();
         ScrollDamping();
+        UpdateNavigation();
     }
 
     private void CheckPress()
@@ -233,9 +239,21 @@ public class ScreenEvent : MonoBehaviour
         var centerPos = targetCamera.ViewportToWorldPoint(centerViewPos);
 
         cameraTS.eulerAngles = angle;
-        targetCamera.transform.position = new Vector3(centerPos.x, targetCamera.transform.position.y, centerPos.z);
-        isNav = false;
+        navPos = new Vector3(centerPos.x, targetCamera.transform.position.y, centerPos.z);
 
     }
+
+    private void UpdateNavigation()
+    {
+        if(isNav)
+        {
+            targetCamera.transform.position = Vector3.SmoothDamp(targetCamera.transform.position, navPos, ref currentPos, navTime);
+            if (Vector3.SqrMagnitude(targetCamera.transform.position - navPos) < 1f)
+            {
+                isNav = false;
+            }
+        }
+    }
+
 }
 

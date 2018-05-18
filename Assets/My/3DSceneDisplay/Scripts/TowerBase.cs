@@ -6,6 +6,7 @@ using BuildTowerInfo = BuildTowerUI.BuildTowerInfo;
 public class TowerBase : MonoBehaviour, IClickEvent
 {
     #region const string
+    private const string fogPath = @"Prefabs/BuildFog";
     private const string towerDir = @"Prefabs/Tower/";
 
     private const string towerInfoData = @"0|1|Tower_Empty
@@ -56,7 +57,9 @@ public class TowerBase : MonoBehaviour, IClickEvent
         }
     }
     public static Dictionary<string, TowerInfo> towerInfoDic;
+    public static ParticleSystem particlePrefab;
     public static TowerBase current;
+    
 
     [SerializeField]
     private int towerID;
@@ -65,15 +68,16 @@ public class TowerBase : MonoBehaviour, IClickEvent
     private BoxCollider boxCol;
     private Transform modelTS;
     private TowerInfo towerinfo;
+    private Animation buildUp;
 
     private void Awake()
     {
-        OnInitDic();
+        OnInitBase();
         OnInitCompent();
         //CreateDeaultTower();
     }
 
-    private void OnInitDic()
+    private void OnInitBase()
     {
         if (towerInfoDic == null)
         {
@@ -86,6 +90,11 @@ public class TowerBase : MonoBehaviour, IClickEvent
                     (str[0], str[1], str[2].Trim());
                 towerInfoDic.Add(TowerInfo.MakeKey(str[0], str[1]), info);
             }
+        }
+
+        if(!particlePrefab)
+        {
+            particlePrefab = Resources.Load<ParticleSystem>(fogPath);
         }
     }
 
@@ -111,6 +120,7 @@ public class TowerBase : MonoBehaviour, IClickEvent
         boxCol = gameObject.GetComponent<BoxCollider>();
         boxCol.enabled = false;
         modelTS = transform.Find("Model");
+        buildUp = GetComponent<Animation>();
     }
 
     protected virtual void OnInitTower()
@@ -171,6 +181,10 @@ public class TowerBase : MonoBehaviour, IClickEvent
         if (modelTS.childCount > 0)
         {
             Destroy(modelTS.GetChild(0).gameObject);
+            var particle = Instantiate(particlePrefab, transform);
+            particle.transform.localPosition = Vector3.zero;
+            particle.Play();
+            buildUp.Play();
         }
         string towername = _towerInfo.modelName;
         GameObject go = Resources.Load<GameObject>(towerDir + towername);
