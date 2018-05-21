@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4731002422863682}
   - component: {fileID: 114623229391974954}
+  - component: {fileID: 114245185190803640}
   m_Layer: 8
   m_Name: TalentItem
   m_TagString: Untagged
@@ -211,9 +212,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1954875074674636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 84, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -600, y: 235, z: 0}
+  m_LocalScale: {x: 0.999, y: 0.999, z: 0.999}
   m_Children:
   - {fileID: 4512896868597048}
   - {fileID: 4559570418300464}
@@ -271,6 +272,17 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Highlight - Shadowed
   mFillCenter: 1
+--- !u!114 &114245185190803640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1954875074674636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96ac380c429f714e93400fe1437ed25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114250744899073648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -429,7 +441,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.133333
+  aspectRatio: 7.625
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -516,7 +528,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.095238
+  aspectRatio: 8
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: dab99f6ebce37424e9b86d6dd4eff349, type: 3}
   mFont: {fileID: 0}
