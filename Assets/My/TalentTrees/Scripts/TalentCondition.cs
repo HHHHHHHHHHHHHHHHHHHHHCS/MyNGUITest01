@@ -15,7 +15,7 @@ public class TalentCondition : MonoBehaviour
         spriteArray = GetComponentsInChildren<UISprite>();
     }
 
-    private void SetCondition(bool contidion)
+    public void SetCondition(bool contidion=true)
     {
         foreach (var item in spriteArray)
         {

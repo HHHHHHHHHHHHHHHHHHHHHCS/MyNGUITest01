@@ -36,7 +36,8 @@ public class TalentTreesTest : MonoBehaviour
     [MenuItem("Editor/SetItemName")]
     private static void SetItemName()
     {
-        if (Selection.activeTransform.name != "TalentScrollView")
+        var activeTransform = Selection.activeTransform;
+        if (activeTransform.name != "TalentScrollView")
             return;
 
         string nameBase = "TalentItem";
@@ -45,7 +46,9 @@ public class TalentTreesTest : MonoBehaviour
 
         List<Transform> talentItemList = new List<Transform>();
 
-        foreach (Transform item in Selection.activeTransform)
+        //GameObject mask = activeTransform.parent.Find("TalentMask").gameObject;
+
+        foreach (Transform item in activeTransform)
         {
             talentItemList.Add(item);
         }
@@ -73,6 +76,10 @@ public class TalentTreesTest : MonoBehaviour
             }
             talentItemList[i].name = string.Format("{0}_{1}_{2}", nameBase, yIndex, xIndex++);
             talentItemList[i].SetSiblingIndex(i);
+            talentItemList[i].GetComponent<TalentMono>().SetTalentID(i+1);
+
+
+            //NGUITools.AddChild(talentItemList[i].Find("TalentIcon").gameObject, mask).name= "TalentMask";
         }
     }
 }
