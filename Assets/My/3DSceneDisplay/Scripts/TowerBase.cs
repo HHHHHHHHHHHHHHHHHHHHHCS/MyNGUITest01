@@ -120,7 +120,7 @@ public class TowerBase : MonoBehaviour, IClickEvent
         boxCol = gameObject.GetComponent<BoxCollider>();
         boxCol.enabled = false;
         modelTS = transform.Find("Model");
-        buildUp = GetComponent<Animation>();
+        buildUp = modelTS.GetComponent<Animation>();
     }
 
     protected virtual void OnInitTower()
