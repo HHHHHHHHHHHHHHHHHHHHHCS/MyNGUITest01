@@ -36,7 +36,7 @@ public class TalentInfoManager
             KeyValuePair<int, int>[] keyValuePairs = conditionLength <= 0 ? null : new KeyValuePair<int, int>[conditionLength];
             for (int i = 0; i < conditionLength; i++)
             {
-                keyValuePairs[0] = new KeyValuePair<int, int>(int.Parse(infoDetail[5 + 2 * i]), int.Parse(infoDetail[6 + 2 * i]));
+                keyValuePairs[i] = new KeyValuePair<int, int>(int.Parse(infoDetail[5 + 2 * i]), int.Parse(infoDetail[6 + 2 * i]));
             }
 
             TalentInfo talentInfo = new TalentInfo()
@@ -65,11 +65,15 @@ public class TalentInfoManager
         TalentMonoList.AddLast(mono);
     }
 
-    public void RegisterLvChangeEvent(int id,Action act)
+    public void RegisterLvChangeEvent(int id, Action act)
     {
-        foreach(var mono in TalentMonoList)
+        foreach (var mono in TalentMonoList)
         {
-            mono.CheckCondition();
+            if (mono.GetTalentID() == id)
+            {
+                mono.LvUpEvent += act;
+                break;
+            }
         }
 
     }

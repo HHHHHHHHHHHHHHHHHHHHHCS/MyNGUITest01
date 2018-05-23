@@ -20,6 +20,12 @@ public class TalentMono : MonoBehaviour
     private UISlider lvSlider;
     private UILabel lvText;
 
+    private bool isUnlock;
+
+    public int GetTalentID()
+    {
+        return talentID;
+    }
 #if UNITY_EDITOR
     public void SetTalentID(int i)
     {
@@ -37,6 +43,9 @@ public class TalentMono : MonoBehaviour
         nameText = root.Find("TalentNameBg/TalentNameText").GetComponent<UILabel>();
         lvSlider = root.Find("TalentLevelBg").GetComponent<UISlider>();
         lvText = root.Find("TalentLevelBg/TaletnLevelText").GetComponent<UILabel>();
+
+        EventDelegate.Add(iconButton.onClick, ClickIconEvent);
+        TalentInfoManager.Instance.AddTalentMono(this);
     }
 
     private void Start()
@@ -45,10 +54,19 @@ public class TalentMono : MonoBehaviour
         if (talentInfo != null)
         {
             icon.spriteName = talentInfo.SkillSprite;
-            iconButton.normalSprite= talentInfo.SkillSprite;
+            iconButton.normalSprite = talentInfo.SkillSprite;
             nameText.text = talentInfo.SkillName;
             SetLV();
             CheckCondition();
+
+            if(talentInfo.SkillCondition!=null)
+            {
+                foreach (var item in talentInfo.SkillCondition)
+                {
+                    TalentInfoManager.Instance.RegisterLvChangeEvent(item.Key, CheckCondition);
+                }
+            }
+
         }
     }
 
@@ -69,7 +87,7 @@ public class TalentMono : MonoBehaviour
                 for (int i = 0; i < conditions.Length; i++)
                 {
                     var condition = TalentInfoManager.Instance.GetTalentInfoByID(conditions[i].Key);
-                    if (condition != null && condition.SkillSkillLevel > conditions[i].Value
+                    if (condition != null && condition.SkillSkillLevel >= conditions[i].Value
                         && i < talentConditionArray.Length)
                     {
                         talentConditionArray[i].SetCondition();
@@ -77,8 +95,9 @@ public class TalentMono : MonoBehaviour
                     }
                 }
 
-                if(trueCondition >= conditions.Length)
+                if (trueCondition >= conditions.Length)
                 {
+                    isUnlock = true;
                     maskIcon.gameObject.SetActive(false);
                     if (talentConditionArray.Length > conditions.Length)
                     {
@@ -88,18 +107,24 @@ public class TalentMono : MonoBehaviour
             }
             else
             {
+                isUnlock = true;
                 maskIcon.gameObject.SetActive(false);
             }
         }
     }
 
-    public void ClickIconEvent()
+    private void ClickIconEvent()
     {
-
-
-        if(LvUpEvent!=null)
+        if (isUnlock )
         {
-            LvUpEvent();
+            talentInfo.SkillSkillLevel = Mathf.Clamp(talentInfo.SkillSkillLevel + 1, 0, talentInfo.SkillMaxLevel);
+            SetLV();
+            if (LvUpEvent != null)
+            {
+                LvUpEvent();
+            }
         }
+
     }
+
 }

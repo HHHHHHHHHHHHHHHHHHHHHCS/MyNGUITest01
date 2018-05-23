@@ -155,7 +155,6 @@ GameObject:
   m_Component:
   - component: {fileID: 44323849}
   - component: {fileID: 44323850}
-  - component: {fileID: 44323851}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -226,18 +225,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &44323851
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 44323848}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &54516167
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +612,7 @@ GameObject:
   - component: {fileID: 156659261}
   - component: {fileID: 156659263}
   - component: {fileID: 156659262}
+  - component: {fileID: 156659264}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -735,6 +723,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &156659264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 156659259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!4 &164459624
 Transform:
   m_ObjectHideFlags: 0
@@ -793,7 +794,6 @@ GameObject:
   m_Component:
   - component: {fileID: 179196185}
   - component: {fileID: 179196186}
-  - component: {fileID: 179196187}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -864,18 +864,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &179196187
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 179196184}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &205262694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,7 +1216,6 @@ GameObject:
   m_Component:
   - component: {fileID: 225155624}
   - component: {fileID: 225155625}
-  - component: {fileID: 225155626}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -1299,18 +1286,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &225155626
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 225155623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &248641858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,7 +1339,6 @@ GameObject:
   m_Component:
   - component: {fileID: 249522533}
   - component: {fileID: 249522534}
-  - component: {fileID: 249522535}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -1435,18 +1409,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &249522535
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 249522532}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &265571974
 Transform:
   m_ObjectHideFlags: 0
@@ -1574,6 +1536,7 @@ GameObject:
   - component: {fileID: 296001743}
   - component: {fileID: 296001745}
   - component: {fileID: 296001744}
+  - component: {fileID: 296001746}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -1684,6 +1647,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &296001746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 296001741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &306451413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,7 +1669,6 @@ GameObject:
   m_Component:
   - component: {fileID: 306451414}
   - component: {fileID: 306451415}
-  - component: {fileID: 306451416}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -1764,18 +1739,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &306451416
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 306451413}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &306868079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,7 +1748,6 @@ GameObject:
   m_Component:
   - component: {fileID: 306868080}
   - component: {fileID: 306868081}
-  - component: {fileID: 306868082}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -1856,18 +1818,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &306868082
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 306868079}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &322956572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,7 +2008,6 @@ GameObject:
   m_Component:
   - component: {fileID: 332588262}
   - component: {fileID: 332588263}
-  - component: {fileID: 332588264}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -2129,18 +2078,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &332588264
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 332588261}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &357624212
 GameObject:
   m_ObjectHideFlags: 0
@@ -3350,7 +3287,7 @@ Transform:
   - {fileID: 853909329}
   - {fileID: 518836402}
   m_Father: {fileID: 1187707795}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &595082912
 GameObject:
@@ -3567,7 +3504,6 @@ GameObject:
   m_Component:
   - component: {fileID: 651552317}
   - component: {fileID: 651552318}
-  - component: {fileID: 651552319}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -3638,18 +3574,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &651552319
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 651552316}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &656109646
 GameObject:
   m_ObjectHideFlags: 0
@@ -3800,6 +3724,7 @@ GameObject:
   - component: {fileID: 673559174}
   - component: {fileID: 673559176}
   - component: {fileID: 673559175}
+  - component: {fileID: 673559177}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -3910,6 +3835,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &673559177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 673559172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &697723192
 GameObject:
   m_ObjectHideFlags: 0
@@ -3922,6 +3860,7 @@ GameObject:
   - component: {fileID: 697723194}
   - component: {fileID: 697723196}
   - component: {fileID: 697723195}
+  - component: {fileID: 697723197}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -4032,6 +3971,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &697723197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 697723192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &703819737
 GameObject:
   m_ObjectHideFlags: 0
@@ -4149,7 +4101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 705320006}
   - component: {fileID: 705320007}
-  - component: {fileID: 705320008}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -4220,18 +4171,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &705320008
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 705320005}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &710093558
 GameObject:
   m_ObjectHideFlags: 0
@@ -4327,6 +4266,7 @@ GameObject:
   - component: {fileID: 714797644}
   - component: {fileID: 714797646}
   - component: {fileID: 714797645}
+  - component: {fileID: 714797647}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -4437,6 +4377,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &714797647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 714797642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &718933889
 GameObject:
   m_ObjectHideFlags: 0
@@ -4904,6 +4857,7 @@ GameObject:
   - component: {fileID: 804144115}
   - component: {fileID: 804144117}
   - component: {fileID: 804144116}
+  - component: {fileID: 804144118}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -5014,6 +4968,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &804144118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 804144113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &804845393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5289,7 +5256,6 @@ GameObject:
   m_Component:
   - component: {fileID: 860872427}
   - component: {fileID: 860872428}
-  - component: {fileID: 860872429}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -5360,18 +5326,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &860872429
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 860872426}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &885427877
 GameObject:
   m_ObjectHideFlags: 0
@@ -5626,7 +5580,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 944139537}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -200, y: 40, z: 0}
+  m_LocalPosition: {x: 200, y: 40, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2027269926}
@@ -5876,6 +5830,7 @@ GameObject:
   - component: {fileID: 1009486372}
   - component: {fileID: 1009486374}
   - component: {fileID: 1009486373}
+  - component: {fileID: 1009486375}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -5986,6 +5941,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1009486375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009486370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &1025176881
 GameObject:
   m_ObjectHideFlags: 0
@@ -6114,7 +6082,7 @@ Transform:
   m_Children:
   - {fileID: 452348242}
   m_Father: {fileID: 1187707795}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1031547185
 MonoBehaviour:
@@ -6603,7 +6571,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2027269926}
   m_Father: {fileID: 1582794358}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6967,8 +6936,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1031547184}
   - {fileID: 592936822}
+  - {fileID: 1031547184}
   m_Father: {fileID: 1187707794}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7566,6 +7535,7 @@ GameObject:
   - component: {fileID: 1245235432}
   - component: {fileID: 1245235434}
   - component: {fileID: 1245235433}
+  - component: {fileID: 1245235435}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -7676,6 +7646,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1245235435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1245235430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &1258134603
 GameObject:
   m_ObjectHideFlags: 0
@@ -8214,6 +8197,7 @@ GameObject:
   - component: {fileID: 1306188931}
   - component: {fileID: 1306188933}
   - component: {fileID: 1306188932}
+  - component: {fileID: 1306188934}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -8324,6 +8308,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1306188934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1306188929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &1326368514
 GameObject:
   m_ObjectHideFlags: 0
@@ -8505,7 +8502,7 @@ Transform:
   m_Children:
   - {fileID: 2091754389}
   m_Father: {fileID: 1562164425}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1335663471
 MonoBehaviour:
@@ -8629,7 +8626,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2027269926}
   - {fileID: 1701464967}
   m_Father: {fileID: 1339091038}
   m_RootOrder: 3
@@ -8643,7 +8639,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1353461454}
   - component: {fileID: 1353461455}
-  - component: {fileID: 1353461456}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -8714,18 +8709,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &1353461456
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1353461453}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1379715484
 GameObject:
   m_ObjectHideFlags: 0
@@ -9299,7 +9282,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1415100415}
   - component: {fileID: 1415100416}
-  - component: {fileID: 1415100417}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -9370,18 +9352,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &1415100417
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1415100414}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1417912192
 GameObject:
   m_ObjectHideFlags: 0
@@ -10566,8 +10536,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2133703069}
   - {fileID: 1335663470}
+  - {fileID: 2133703069}
   - {fileID: 111393047}
   m_Father: {fileID: 1562164424}
   m_RootOrder: 3
@@ -11379,6 +11349,7 @@ GameObject:
   - component: {fileID: 1621319843}
   - component: {fileID: 1621319845}
   - component: {fileID: 1621319844}
+  - component: {fileID: 1621319846}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -11489,6 +11460,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1621319846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1621319841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &1633777875
 GameObject:
   m_ObjectHideFlags: 0
@@ -12060,7 +12044,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1692260120}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -60, y: 400, z: 0}
+  m_LocalPosition: {x: 60, y: 400, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2133703069}
@@ -12147,7 +12131,7 @@ Transform:
   m_Children:
   - {fileID: 1381244182}
   m_Father: {fileID: 1339091039}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1701464968
 MonoBehaviour:
@@ -12312,7 +12296,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1736404687}
   - component: {fileID: 1736404688}
-  - component: {fileID: 1736404689}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -12383,18 +12366,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &1736404689
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1736404686}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1738923184
 GameObject:
   m_ObjectHideFlags: 0
@@ -12404,7 +12375,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1738923185}
   - component: {fileID: 1738923186}
-  - component: {fileID: 1738923187}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -12475,18 +12445,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &1738923187
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1738923184}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1741626295
 GameObject:
   m_ObjectHideFlags: 0
@@ -12499,6 +12457,7 @@ GameObject:
   - component: {fileID: 1741626297}
   - component: {fileID: 1741626299}
   - component: {fileID: 1741626298}
+  - component: {fileID: 1741626300}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -12609,6 +12568,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1741626300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741626295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &1745758341
 GameObject:
   m_ObjectHideFlags: 0
@@ -12621,6 +12593,7 @@ GameObject:
   - component: {fileID: 1745758343}
   - component: {fileID: 1745758345}
   - component: {fileID: 1745758344}
+  - component: {fileID: 1745758346}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -12731,6 +12704,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1745758346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1745758341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &1751676176
 GameObject:
   m_ObjectHideFlags: 0
@@ -12787,6 +12773,7 @@ GameObject:
   - component: {fileID: 1755081192}
   - component: {fileID: 1755081194}
   - component: {fileID: 1755081193}
+  - component: {fileID: 1755081195}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -12897,6 +12884,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1755081195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755081190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &1780136223
 GameObject:
   m_ObjectHideFlags: 0
@@ -12906,7 +12906,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1780136224}
   - component: {fileID: 1780136225}
-  - component: {fileID: 1780136226}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -12977,18 +12976,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &1780136226
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1780136223}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1834508550
 Transform:
   m_ObjectHideFlags: 0
@@ -13034,6 +13021,7 @@ GameObject:
   - component: {fileID: 1838460736}
   - component: {fileID: 1838460738}
   - component: {fileID: 1838460737}
+  - component: {fileID: 1838460739}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -13144,6 +13132,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1838460739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1838460734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &1846351086
 GameObject:
   m_ObjectHideFlags: 0
@@ -13919,6 +13920,7 @@ GameObject:
   - component: {fileID: 1999135710}
   - component: {fileID: 1999135712}
   - component: {fileID: 1999135711}
+  - component: {fileID: 1999135713}
   m_Layer: 8
   m_Name: TalentIcon
   m_TagString: Untagged
@@ -14029,6 +14031,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198, y: 198, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1999135713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1999135708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 221475100}
+  draggablePanel: {fileID: 0}
 --- !u!1 &2000181860
 GameObject:
   m_ObjectHideFlags: 0
@@ -14156,7 +14171,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 944139538}
-  m_Father: {fileID: 1339091039}
+  m_Father: {fileID: 1117930920}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2027269927
@@ -14689,7 +14704,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2091754388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 60, y: 400, z: 0}
+  m_LocalPosition: {x: -60, y: 400, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1335663470}
@@ -14755,7 +14770,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2119258369}
   - component: {fileID: 2119258370}
-  - component: {fileID: 2119258371}
   m_Layer: 8
   m_Name: TalentMask
   m_TagString: Untagged
@@ -14826,18 +14840,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Screw
   mFillCenter: 1
---- !u!65 &2119258371
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2119258368}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 198, y: 198, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2127217013
 GameObject:
   m_ObjectHideFlags: 0
@@ -14966,7 +14968,7 @@ Transform:
   m_Children:
   - {fileID: 1692260121}
   m_Father: {fileID: 1562164425}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2133703070
 MonoBehaviour:
