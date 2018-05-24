@@ -69,6 +69,9 @@ public class TowerBase : MonoBehaviour, IClickEvent
     private Transform modelTS;
     private TowerInfo towerinfo;
     private Animation buildUp;
+    private GameObject lv_Parent;
+    private SpriteRenderer lvSpriteUnit, lvSpriteTen;
+    private float lvUnitPosX,lvTenPosX,lvMiddlePosX;
 
     private void Awake()
     {
@@ -96,6 +99,14 @@ public class TowerBase : MonoBehaviour, IClickEvent
         {
             particlePrefab = Resources.Load<ParticleSystem>(fogPath);
         }
+
+        lv_Parent = transform.Find("Lv_Parent").gameObject;
+        lvSpriteUnit = lv_Parent.transform.Find("Lv_Unit").GetComponent<SpriteRenderer>();
+        lvSpriteTen = lv_Parent.transform.Find("Lv_Ten").GetComponent<SpriteRenderer>();
+        lvUnitPosX = lvSpriteUnit.transform.position.x;
+        lvTenPosX = lvSpriteTen.transform.position.x;
+        lvMiddlePosX = (lvUnitPosX + lvTenPosX) / 2;
+        SetLV(0);
     }
 
     private TowerInfo? GetTowerInfoByName(string key)
@@ -194,5 +205,40 @@ public class TowerBase : MonoBehaviour, IClickEvent
             Instantiate(go, modelTS);
             OnInitTower();
         }
+
+        SetLV(_towerInfo.id == 0 ? 0:_towerInfo.lv);
+    }
+
+    private void SetLV(int i)
+    {
+        if(i==0)
+        {
+            lv_Parent.SetActive(false);
+        }
+        else
+        {
+            lv_Parent.SetActive(true);
+
+            var spr = LvManager.Instance.GetSprites(i);
+
+
+            lvSpriteUnit.sprite = spr[0];
+            lvSpriteUnit.gameObject.SetActive(true);
+            var pos = lvSpriteUnit.transform.position;
+            if (spr.Length == 1)
+            {
+                pos.x = lvMiddlePosX;
+                lvSpriteUnit.transform.position = pos;
+                lvSpriteTen.gameObject.SetActive(false);
+            }
+            else
+            {
+                pos.x = lvUnitPosX;
+                lvSpriteTen.sprite = spr[1];
+                lvSpriteTen.gameObject.SetActive(true);
+            }
+            lvSpriteUnit.transform.position = pos;
+        }
+ 
     }
 }
