@@ -10,7 +10,7 @@ using Alignment = NGUIText.Alignment;
 
 [ExecuteInEditMode]
 [AddComponentMenu("NGUI/UI/NGUI Label")]
-public class UILabel : UIWidget
+public class UILabel1 : UIWidget
 {
 	public enum Effect
 	{
@@ -1575,60 +1575,11 @@ public class UILabel : UIWidget
 		return null;
 	}
 
+	/// <summary>
+	/// Get the index of the character on the line directly above or below the current index.
+	/// </summary>
 
-    /// <summary>
-    /// HCS SURL
-    /// </summary>
-
-    public string GetSurlAtPosition(Vector3 worldPos) { return GetSurlAtCharacterIndex(GetCharacterIndexAtPosition(worldPos, true)); }
-
-    /// <summary>
-    /// HCS SURL
-    /// </summary>
-
-    public string GetSurlAtPosition(Vector2 localPos) { return GetSurlAtCharacterIndex(GetCharacterIndexAtPosition(localPos, true)); }
-
-
-    /// <summary>
-    /// HCS SURL
-    /// </summary>
-
-    public string GetSurlAtCharacterIndex(int characterIndex)
-    {
-        if (characterIndex != -1 && characterIndex < mText.Length - 6)
-        {
-            int linkStart;
-
-            // LastIndexOf() fails if the string happens to begin with the expected text
-            if (mText[characterIndex] == '[' &&
-                mText[characterIndex + 1] == 's' &&
-                mText[characterIndex + 2] == 'u' &&
-                mText[characterIndex + 3] == 'r' &&
-                mText[characterIndex + 4] == 'l' &&
-                mText[characterIndex + 5] == '=')
-            {
-                linkStart = characterIndex;
-            }
-            else linkStart = mText.LastIndexOf("[surl=", characterIndex);
-
-            if (linkStart == -1) return null;
-
-            linkStart += 6;
-            int linkEnd = mText.IndexOf("]", linkStart);
-            if (linkEnd == -1) return null;
-
-            int urlEnd = mText.IndexOf("[/surl]", linkEnd);
-            if (urlEnd == -1 || characterIndex <= urlEnd)
-                return mText.Substring(linkStart, linkEnd - linkStart);
-        }
-        return null;
-    }
-
-    /// <summary>
-    /// Get the index of the character on the line directly above or below the current index.
-    /// </summary>
-
-    public int GetCharacterIndex (int currentIndex, KeyCode key)
+	public int GetCharacterIndex (int currentIndex, KeyCode key)
 	{
 		if (isValid)
 		{

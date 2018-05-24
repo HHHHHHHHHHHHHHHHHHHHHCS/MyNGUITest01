@@ -446,7 +446,8 @@ static public class NGUIText
 		bool underline = false;
 		bool strikethrough = false;
 		bool ignoreColor = false;
-		return ParseSymbol(text, ref index, null, false, ref n, ref bold, ref italic, ref underline, ref strikethrough, ref ignoreColor);
+        bool newLine = false;
+		return ParseSymbol(text, ref index, null, false, ref n, ref bold, ref italic, ref underline, ref strikethrough, ref ignoreColor,ref newLine);
 	}
 
 	/// <summary>
@@ -461,12 +462,14 @@ static public class NGUIText
 	}
 
 	/// <summary>
+    /// HCS 有修改
 	/// Parse the symbol, if possible. Returns 'true' if the 'index' was adjusted.
 	/// Advanced symbol support originally contributed by Rudy Pangestu.
 	/// </summary>
-
+    
 	static public bool ParseSymbol (string text, ref int index, BetterList<Color> colors, bool premultiply,
-		ref int sub, ref bool bold, ref bool italic, ref bool underline, ref bool strike, ref bool ignoreColor)
+		ref int sub, ref bool bold, ref bool italic, ref bool underline, ref bool strike, ref bool ignoreColor
+        ,ref bool newLine)
 	{
 		int length = text.Length;
 
@@ -541,7 +544,12 @@ static public class NGUIText
 				index += 4;
 				return true;
 
-				case "[/c]":
+                case "[br]":
+                    newLine = true;
+                    index += 4;
+                return true;
+
+                case "[/c]":
 				ignoreColor = false;
 				index += 4;
 				return true;
@@ -604,10 +612,24 @@ static public class NGUIText
 				case "[/url]":
 				index += 6;
 				return true;
-			}
-		}
+            }
+        }
 
-		if (text[index + 1] == 'u' && text[index + 2] == 'r' && text[index + 3] == 'l' && text[index + 4] == '=')
+        if (index + 7 > length) return false;
+
+        if (text[index + 6] == ']')
+        {
+            string sub7 = text.Substring(index, 7);
+
+            switch (sub7)
+            {
+                case "[/surl]":
+                    index += 7;
+                    return true;
+            }
+        }
+
+        if (text[index + 1] == 'u' && text[index + 2] == 'r' && text[index + 3] == 'l' && text[index + 4] == '=')
 		{
 			int closingBracket = text.IndexOf(']', index + 4);
 
@@ -623,7 +645,24 @@ static public class NGUIText
 			}
 		}
 
-		if (index + 8 > length) return false;
+        if (text[index + 1] == 's' && text[index + 2] == 'u' && text[index + 3] == 'r' && text[index + 4] == 'l' && text[index + 5] == '=')
+        {
+            int closingBracket = text.IndexOf(']', index + 5);
+
+            if (closingBracket != -1)
+            {
+                index = closingBracket + 1;
+                return true;
+            }
+            else
+            {
+                index = text.Length;
+                return true;
+            }
+        }
+
+
+        if (index + 8 > length) return false;
 
 		if (text[index + 7] == ']')
 		{
@@ -683,9 +722,10 @@ static public class NGUIText
 					bool underline = false;
 					bool strikethrough = false;
 					bool ignoreColor = false;
-					int retVal = i;
+                    bool newLine = false;
+                    int retVal = i;
 
-					if (ParseSymbol(text, ref retVal, null, false, ref sub, ref bold, ref italic, ref underline, ref strikethrough, ref ignoreColor))
+					if (ParseSymbol(text, ref retVal, null, false, ref sub, ref bold, ref italic, ref underline, ref strikethrough, ref ignoreColor,ref newLine))
 					{
 						text = text.Remove(i, retVal - i);
 						imax = text.Length;
@@ -1059,6 +1099,7 @@ static public class NGUIText
 	}
 
 	/// <summary>
+    /// HCS 有修改
 	/// Text wrapping functionality. The 'width' and 'height' should be in pixels.
 	/// </summary>
 
@@ -1081,7 +1122,8 @@ static public class NGUIText
 		}
 
 		if (string.IsNullOrEmpty(text)) text = " ";
-		Prepare(text);
+        text = text.Replace("[br]", "\n");
+        Prepare(text);
 
 		StringBuilder sb = new StringBuilder();
 		int textLength = text.Length;
@@ -1098,6 +1140,7 @@ static public class NGUIText
 		bool underline = false;
 		bool strikethrough = false;
 		bool ignoreColor = false;
+        bool newLine = false;
 
 		if (!useSymbols) wrapLineColors = false;
 		if (wrapLineColors)
@@ -1156,7 +1199,7 @@ static public class NGUIText
 					}
 				}
 				else if (ParseSymbol(text, ref offset, mColors, premultiply, ref subscriptMode, ref bold,
-					ref italic, ref underline, ref strikethrough, ref ignoreColor))
+					ref italic, ref underline, ref strikethrough, ref ignoreColor,ref newLine))
 				{
 					if (ignoreColor)
 					{
@@ -1383,6 +1426,7 @@ static public class NGUIText
 		bool underline = false;
 		bool strikethrough = false;
 		bool ignoreColor = false;
+        bool newLine = false;
 		const float sizeShrinkage = 0.75f;
 
 		float v0x;
@@ -1430,7 +1474,7 @@ static public class NGUIText
 
 			// Color changing symbol
 			if (encoding && ParseSymbol(text, ref i, mColors, premultiply, ref subscriptMode, ref bold,
-				ref italic, ref underline, ref strikethrough, ref ignoreColor))
+				ref italic, ref underline, ref strikethrough, ref ignoreColor,ref newLine))
 			{
 				Color fc;
 
