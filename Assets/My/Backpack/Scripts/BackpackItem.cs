@@ -34,6 +34,9 @@ public class BackpackItem : MonoBehaviour
     }
 
 
-
+    public void SetInfo(BackpackItemInfo info)
+    {
+        itemIcon.spriteName = info.ItemSprite;
+    }
 
 }

@@ -33,7 +33,7 @@ public class TalentTreesTest : MonoBehaviour
         }
     }
 
-    [MenuItem("Editor/SetItemName")]
+    [MenuItem("Editor/SetTalentTreesItemName")]
     private static void SetItemName()
     {
         var activeTransform = Selection.activeTransform;
