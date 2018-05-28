@@ -21,6 +21,8 @@ public class BackpackDataManager
         Moeny
     }
 
+    public event Action<int> RefreshCrystalEvent;
+    public event Action<int> RefreshMoneyEvent;
     public event Action<List<BackpackItemInfo>, BackpackColumn> RefreshViewEvent;
 
     private static BackpackDataManager _instance;
@@ -42,12 +44,17 @@ public class BackpackDataManager
 
     private Dictionary<int, BackpackItemInfo> itemDic;
 
+    private int nowCrystal, nowMoeny;
+
     private BackpackDataManager OnInit()
     {
+        nowCrystal = 1000;
+        nowMoeny = 100000;
         OnInitDic();
         OnInitWeb();
         ChangeColumn(BackpackColumn.Backpack);
         ChangeTag(BackpackTag.Special);
+
         return this;
     }
 
@@ -96,12 +103,24 @@ public class BackpackDataManager
         }
     }
 
+    public void RefreshCrystalMoneyView()
+    {
+        if (RefreshCrystalEvent != null)
+        {
+            RefreshCrystalEvent(nowCrystal);
+        }
+        if (RefreshCrystalEvent != null)
+        {
+            RefreshMoneyEvent(nowMoeny);
+        }
+    }
+
     private List<BackpackItemInfo> GetNowViewData()
     {
         List<BackpackItemInfo> list = new List<BackpackItemInfo>();
         foreach (var item in itemDic.Values)
         {
-            if(item.ItemType == NowBackpackTag
+            if (item.ItemType == NowBackpackTag
                 && (NowBackpackColumn != BackpackColumn.Backpack
                 || item.ItemNumber > 0))
             {
@@ -109,5 +128,27 @@ public class BackpackDataManager
             }
         }
         return list;
+    }
+
+    public int UseItem(int itemID)
+    {
+        itemDic[itemID].ItemNumber -= 1;
+        return itemDic[itemID].ItemNumber;
+    }
+
+    public int BuyCrystalItem(int itemID)
+    {
+        itemDic[itemID].ItemNumber += 1;
+        nowCrystal -= itemDic[itemID].CrystalPrice;
+        RefreshCrystalMoneyView();
+        return itemDic[itemID].ItemNumber;
+    }
+
+    public int BuyMoneyItem(int itemID)
+    {
+        itemDic[itemID].ItemNumber += 1;
+        nowMoeny -= itemDic[itemID].MoenyPrice;
+        RefreshCrystalMoneyView();
+        return itemDic[itemID].ItemNumber;
     }
 }
