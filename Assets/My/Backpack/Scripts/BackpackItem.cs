@@ -59,8 +59,6 @@ public class BackpackItem : MonoBehaviour
         else
         {
             isBackpackShow = false;
-            numberButton.isEnabled = info.ItemNumber > 0;
-
             crystalBuyText.text = info.CrystalPrice.ToString();
             moneyBuyText.text = info.MoenyPrice.ToString();
         }
@@ -80,6 +78,7 @@ public class BackpackItem : MonoBehaviour
     {
         itemNumberText.text = "已拥有:" + result;
         useNumberText.text = "已拥有:" + result + "\n使用";
+        numberButton.isEnabled = result > 0;
     }
 
     public void UseItem()
