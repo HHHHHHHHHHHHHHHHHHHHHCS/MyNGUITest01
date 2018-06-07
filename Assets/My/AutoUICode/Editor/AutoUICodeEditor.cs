@@ -15,12 +15,9 @@ public static class AutoUICodeEditor
 
     private static void CreateCSharp()
     {
-        if(Selection.activeGameObject.name.IndexOf("Panel")<0)
-        {
-            return;
-        }
-        string filePath = AssetDatabase.GetAssetOrScenePath(Selection.activeObject)
-            + Selection.activeGameObject.name + ".cs";
+        string filePath = AssetDatabase.GetAssetOrScenePath(Selection.activeGameObject);
+        filePath = filePath.Substring(0, filePath.LastIndexOf('/'));
+        filePath += '/' + Selection.activeGameObject.name + ".cs";
         using (FileStream fs = File.Create(filePath))
         {
             using (StreamWriter sw = new StreamWriter(fs))
@@ -41,7 +38,7 @@ public static class AutoUICodeEditor
         using UnityEngine;
         using UnityEngine.UI;
 
-        public class "+ selectName + " : MonoBehaviour{";
+        public class " + selectName + " : MonoBehaviour{";
 
         sw.WriteLine(head);
     }
@@ -100,7 +97,7 @@ public static class AutoUICodeEditor
     {
         string itemName = _name;
         char ch = itemName[0];
-        itemName = itemName.Remove(0,1);
+        itemName = itemName.Remove(0, 1);
         itemName = itemName.Insert(0, char.ToLower(ch).ToString());
         return itemName;
     }
