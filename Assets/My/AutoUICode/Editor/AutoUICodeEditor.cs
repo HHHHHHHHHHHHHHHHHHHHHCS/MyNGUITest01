@@ -20,7 +20,7 @@ public static class AutoUICodeEditor
         filePath += '/' + Selection.activeGameObject.name + ".cs";
         using (FileStream fs = File.Create(filePath))
         {
-            using (StreamWriter sw = new StreamWriter(fs))
+            using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
             {
                 WriteHead(sw);
                 WriteValue(sw);
