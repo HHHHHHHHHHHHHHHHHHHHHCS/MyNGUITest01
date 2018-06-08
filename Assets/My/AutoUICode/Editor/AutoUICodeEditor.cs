@@ -48,6 +48,7 @@ public static class AutoUICodeEditor
         StringBuilder sb = new StringBuilder();
         GameObject root = Selection.activeGameObject;
 
+        var sprites = _WriteProperty<UISprite>(sb, root, "Sprite");
         var labels = _WriteProperty<UILabel>(sb, root, "Text");
         var buttons = _WriteProperty<UIButton>(sb, root, "Button");
         var sliders = _WriteProperty<UISlider>(sb, root, "Slider");
@@ -57,6 +58,7 @@ public static class AutoUICodeEditor
         sw.WriteLine(@"Transform root = transform;");
 
         sb.Length = 0;
+        _WriteAwake(sb, sprites);
         _WriteAwake(sb, labels);
         _WriteAwake(sb, buttons);
         _WriteAwake(sb, sliders);
@@ -85,10 +87,10 @@ public static class AutoUICodeEditor
     private static void _WriteAwake<T>(StringBuilder _sb, List<T> _list)
         where T : MonoBehaviour
     {
-        string formatStr = "{0} {1} = root.Find(\"{2}\").GetComponent<{0}>();";
+        string formatStr = "{0} = root.Find(\"{1}\").GetComponent<{2}>();";
         foreach (var item in _list)
         {
-            _sb.AppendFormat(formatStr, typeof(T), GetName(item.name), FindParent(item.transform))
+            _sb.AppendFormat(formatStr, GetName(item.name), FindParent(item.transform), typeof(T))
                 .AppendLine();
         }
     }
