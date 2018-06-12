@@ -28,8 +28,11 @@ public class CloudManager : MonoBehaviour
     {
         if(id==nextCloud)
         {
-            cloudDic[id].HideCloud();
-            nextCloud++;
+            if(cloudDic.ContainsKey(id))
+            {
+                cloudDic[id].HideCloud();
+                nextCloud++;
+            }
         }
         else
         {
