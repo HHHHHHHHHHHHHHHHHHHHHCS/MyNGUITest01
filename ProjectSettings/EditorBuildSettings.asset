@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/My/3DSceneDisplay/Scenes/3DSceneDisplay2.unity
-    guid: 4adcd9617b239d4418613b6f936fc4ca
+    path: Assets/My/3DCameraScroll/Scenes/3DCameraScrollScene.unity
+    guid: 1957d10c01a5bc946a6611223150670e
