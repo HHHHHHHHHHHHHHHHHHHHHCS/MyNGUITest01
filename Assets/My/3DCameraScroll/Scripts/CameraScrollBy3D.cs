@@ -1,21 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraScrollBy3D : MonoBehaviour
 {
+    public Text buildName;
+
     private Transform targetTS;
     private Camera targetCamera;
 
-    private readonly Vector3 startCameraPos = new Vector3(-20,50,-13);
+    private readonly Vector3 startCameraPos = new Vector3(-20, 50, -13);
     private readonly Vector2 clampZoomScale = new Vector2(40, 80);
     private readonly Vector4 nessClampBorder = new Vector4(-45, 205, -100, 60);
     private readonly Vector4 clampClampBorder = new Vector4(-60, 220, -115, 75);
 
     private const float moveSpeed = 4, scrollDistance = 20, scrollNess = 100
-        , zoomScaleSpeed = 33, borderNess = 100, borderNessTime = 0.2f, borderBackSpeed = 100;
+        , zoomScaleSpeed = 33, borderNess = 100, borderNessTime = 0.2f, borderBackSpeed = 100
+        , moveMaxDistance = 10, baseZoomScale = 60;
     private const int queMaxNumber = 10;
 
+    private float moveDistance;
     private Vector2 lastPos;
     private bool isStayTouch, isTwoTouch;
     private LinkedList<Vector2> vec2List;
@@ -48,13 +53,22 @@ public class CameraScrollBy3D : MonoBehaviour
         {
             OnOneTouchEvent();
         }
+        else if (Input.touchCount == 1)
+        {
+        isTwoTouch=false;
+        }
 #endif
     }
 
     private void OnOneTouchEvent()
     {
         Vector2 nowPos = Input.mousePosition;
-        if (Input.GetMouseButtonDown(0))
+        if (isTwoTouch)
+        {
+            OnePress(nowPos);
+            isTwoTouch = false;
+        }
+        else if (Input.GetMouseButtonDown(0))
         {
             OnePress(nowPos);
         }
@@ -75,6 +89,7 @@ public class CameraScrollBy3D : MonoBehaviour
         scrollAccele = Vector2.zero;
         nessScrollAccele = Vector2.zero;
         borderSpeed = Vector2.zero;
+        moveDistance = 0;
         vec2List.Clear();
         AddQueue(nowPos);
     }
@@ -84,16 +99,15 @@ public class CameraScrollBy3D : MonoBehaviour
         isStayTouch = false;
         AddQueue(nowPos);
         MoveDir(Vector2.zero, false, true);
-        ScrollScreen();
+        if (!StartRayCast(nowPos))
+        {
+            ScrollScreen();
+        }
     }
 
     private void OneStay(Vector2 nowPos)
     {
-        if (isTwoTouch)
-        {
-            OnePress(nowPos);
-            isTwoTouch = false;
-        }
+
         AddQueue(nowPos);
         Vector2 newVec2 = nowPos - lastPos;
         MoveDir(newVec2);
@@ -141,7 +155,7 @@ public class CameraScrollBy3D : MonoBehaviour
         {
             float tempX = borderSpeed.x + nessBorderAccele.x * Time.deltaTime;
             if (tempX * borderSpeed.x < 0
-                ||(targetTS.position.x >= nessClampBorder.x && targetTS.position.x <= nessClampBorder.y))
+                || (targetTS.position.x >= nessClampBorder.x && targetTS.position.x <= nessClampBorder.y))
             {
                 borderSpeed.x = 0;
             }
@@ -167,7 +181,8 @@ public class CameraScrollBy3D : MonoBehaviour
 
     private void MoveDir(Vector2 dir, bool isScroll = false, bool isUp = false)
     {
-        var moveVec3 = -new Vector3(dir.x, 0, dir.y) * Time.deltaTime * moveSpeed;
+        var moveVec3 = -new Vector3(dir.x, 0, dir.y) * Time.deltaTime * moveSpeed * (targetCamera.fieldOfView / baseZoomScale);
+        moveDistance += moveVec3.magnitude;
         Vector4 clampVec4;
         if (isScroll && (targetTS.position.x >= nessClampBorder.x && targetTS.position.x <= nessClampBorder.y
             && targetTS.position.z >= nessClampBorder.z && targetTS.position.z <= nessClampBorder.w))
@@ -185,7 +200,7 @@ public class CameraScrollBy3D : MonoBehaviour
 
         targetTS.position = moveVec3;
 
-        if (isUp|| isScroll)
+        if (isUp || isScroll)
         {
             if (targetTS.position.x < nessClampBorder.x)
             {
@@ -199,7 +214,7 @@ public class CameraScrollBy3D : MonoBehaviour
                 scrollAccele.x = 0;
                 nessScrollAccele.x = 0;
                 borderSpeed.x = -borderBackSpeed;
-                nessBorderAccele.x = (targetTS.position.x - nessClampBorder.y) / borderNessTime ;
+                nessBorderAccele.x = (targetTS.position.x - nessClampBorder.y) / borderNessTime;
             }
 
             if (targetTS.position.z < nessClampBorder.z)
@@ -260,5 +275,23 @@ public class CameraScrollBy3D : MonoBehaviour
         float endView = Mathf.Clamp((targetCamera.fieldOfView - scaleFactor)
             , clampZoomScale.x, clampZoomScale.y);
         targetCamera.fieldOfView = endView;
+    }
+
+    private bool StartRayCast(Vector2 nowPos)
+    {
+        if (moveDistance <= moveMaxDistance)
+        {
+            RaycastHit hitInfo;
+            Ray ray = targetCamera.ScreenPointToRay(nowPos);
+            if (Physics.Raycast(ray, out hitInfo, 1000f))
+            {
+                GameObject gameObj = hitInfo.collider.gameObject;
+                Debug.Log(gameObj);
+                buildName.text = gameObj.name;
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }
