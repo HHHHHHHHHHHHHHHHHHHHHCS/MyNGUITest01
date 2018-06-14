@@ -7,9 +7,10 @@ public class CameraScrollBy3D : MonoBehaviour
     private Transform targetTS;
     private Camera targetCamera;
 
+    private readonly Vector3 startCameraPos = new Vector3(-20,50,-13);
     private readonly Vector2 clampZoomScale = new Vector2(40, 80);
-    private readonly Vector4 nessClampBorder = new Vector4(-500, 500, -500, 400);
-    private readonly Vector4 clampClampBorder = new Vector4(-550, 550, -550, 450);
+    private readonly Vector4 nessClampBorder = new Vector4(-45, 205, -100, 60);
+    private readonly Vector4 clampClampBorder = new Vector4(-60, 220, -115, 75);
 
     private const float moveSpeed = 4, scrollDistance = 20, scrollNess = 100
         , zoomScaleSpeed = 33, borderNess = 100, borderNessTime = 0.2f, borderBackSpeed = 100;
@@ -24,6 +25,7 @@ public class CameraScrollBy3D : MonoBehaviour
     {
         targetTS = transform;
         targetCamera = targetTS.GetComponent<Camera>();
+        targetTS.position = startCameraPos;
         vec2List = new LinkedList<Vector2>();
     }
 
@@ -255,7 +257,7 @@ public class CameraScrollBy3D : MonoBehaviour
     private void ZoomCamera(float offset)
     {
         float scaleFactor = offset / zoomScaleSpeed;
-        float endView = Mathf.Clamp((targetCamera.fieldOfView + scaleFactor)
+        float endView = Mathf.Clamp((targetCamera.fieldOfView - scaleFactor)
             , clampZoomScale.x, clampZoomScale.y);
         targetCamera.fieldOfView = endView;
     }
