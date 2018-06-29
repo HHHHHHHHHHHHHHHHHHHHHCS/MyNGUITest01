@@ -790,6 +790,60 @@ Transform:
   m_Father: {fileID: 729423033}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &345670578
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.649603
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.2141628
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+      propertyPath: m_Name
+      value: Tower_Hammer_LV1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 00f627af8574bb34a88fe7bbbc62a7d6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &352790377
 Prefab:
   m_ObjectHideFlags: 0
